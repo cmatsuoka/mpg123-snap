@@ -23,6 +23,11 @@ parts:
       - libpulse-dev
     stage-packages:
       - libpulse0
+    prime:
+      - -usr/share/doc
+      - -usr/share/man
+      - -include
+      - -lib/mpg123/output_oss.so
 
 apps:
   mpg123:
@@ -35,3 +40,22 @@ apps:
       - x11  # needed to use pulse
     environment:
       MPG123_MODDIR: $SNAP/lib/mpg123
+
+  id3dump:
+    command: bin/mpg123-id3dump
+    plugs:
+      - home
+
+  mpg123-strip:
+    command: bin/mpg123-strip
+    plugs:
+      - home
+
+  out123:
+    command: bin/out123
+    plugs:
+      - home
+      - pulseaudio
+      - audio-playback
+      - network
+      - x11  # needed to use pulse
