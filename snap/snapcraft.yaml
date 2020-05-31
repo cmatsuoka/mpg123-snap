@@ -1,0 +1,37 @@
+name: mpg123-cm
+version: 1.26.1
+base: core18
+summary: A fast console MPEG audio player
+description: |
+  mpg123 is a console-based MPEG audio decoder and player for layers
+  1, 2 and 3, including MP2 and MP3, from local files or streamed from
+  the network.
+grade: devel
+confinement: strict
+
+parts:
+  mpg123:
+    plugin: autotools
+    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.26.1/mpg123-1.26.1.tar.bz2
+    configflags:
+      - --prefix=
+      - --with-default-audio=pulse
+      - --enable-network=yes
+      - --enable-ipv6=yes
+    build-packages:
+      - build-essential
+      - libpulse-dev
+    stage-packages:
+      - libpulse0
+
+apps:
+  mpg123:
+    command: bin/mpg123
+    plugs:
+      - home
+      - pulseaudio
+      - audio-playback
+      - network
+      - x11  # needed to use pulse
+    environment:
+      MPG123_MODDIR: $SNAP/lib/mpg123
