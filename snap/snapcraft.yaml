@@ -21,13 +21,15 @@ parts:
     build-packages:
       - build-essential
       - libpulse-dev
+      - libasound-dev
     stage-packages:
       - libpulse0
+      - libasound2
     prime:
       - -usr/share/doc
       - -usr/share/man
+      - -usr/share/lintian
       - -include
-      - -lib/mpg123/output_oss.so
 
 apps:
   mpg123:
@@ -35,6 +37,7 @@ apps:
     plugs:
       - home
       - pulseaudio
+      - alsa
       - audio-playback
       - network
       - x11  # needed to use pulse
@@ -56,6 +59,11 @@ apps:
     plugs:
       - home
       - pulseaudio
+      - alsa
       - audio-playback
       - network
       - x11  # needed to use pulse
+
+layout:
+  /usr/share/alsa:
+    symlink: $SNAP/usr/share/alsa
