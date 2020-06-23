@@ -6,7 +6,7 @@ description: |
   mpg123 is a console-based MPEG audio decoder and player for layers
   1, 2 and 3, including MP2 and MP3, from local files or streamed from
   the network.
-grade: devel
+grade: stable
 confinement: strict
 
 parts:
