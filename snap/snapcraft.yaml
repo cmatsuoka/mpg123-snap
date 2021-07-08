@@ -11,6 +11,7 @@ confinement: strict
 
 parts:
   mpg123:
+    after: [patches]
     plugin: autotools
     source: https://sourceforge.net/projects/mpg123/files/mpg123/1.28.0/mpg123-1.28.0.tar.bz2
     configflags:
@@ -25,11 +26,20 @@ parts:
     stage-packages:
       - libpulse0
       - libasound2
+    override-pull: |
+      snapcraftctl pull
+      patch -d "$SNAPCRAFT_PART_SRC" -p1 < "$SNAPCRAFT_STAGE"/mpg123-1.28.0-armfpu-neon.diff
     prime:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
       - -include
+
+  patches:
+    plugin: dump
+    source: patches
+    prime:
+      - -*
 
 apps:
   mpg123:
