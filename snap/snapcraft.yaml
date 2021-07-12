@@ -1,5 +1,5 @@
 name: mpg123-cm
-version: 1.28.0
+version: 1.28.2
 base: core18
 summary: A fast console MPEG audio player
 description: |
@@ -13,7 +13,7 @@ parts:
   mpg123:
     after: [patches]
     plugin: autotools
-    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.28.0/mpg123-1.28.0.tar.bz2
+    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.28.2/mpg123-1.28.2.tar.bz2
     configflags:
       - --prefix=
       - --with-default-audio=pulse
@@ -28,7 +28,7 @@ parts:
       - libasound2
     override-pull: |
       snapcraftctl pull
-      patch -d "$SNAPCRAFT_PART_SRC" -p1 < "$SNAPCRAFT_STAGE"/mpg123-1.28.0-armfpu-neon.diff
+      # patch -d "$SNAPCRAFT_PART_SRC" -p1 < "$SNAPCRAFT_STAGE"/mpg123-1.28.0-armfpu-neon.diff
     prime:
       - -usr/share/doc
       - -usr/share/man
