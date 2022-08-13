@@ -1,6 +1,6 @@
 name: mpg123-cm
 version: 1.30.2
-base: core18
+base: core22
 summary: A fast console MPEG audio player
 description: |
   mpg123 is a console-based MPEG audio decoder and player for layers
@@ -11,10 +11,9 @@ confinement: strict
 
 parts:
   mpg123:
-    after: [patches]
     plugin: autotools
     source: https://sourceforge.net/projects/mpg123/files/mpg123/1.30.2/mpg123-1.30.2.tar.bz2
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --with-default-audio=pulse
       - --enable-network=yes
@@ -27,31 +26,32 @@ parts:
       - libpulse0
       - libasound2
     override-pull: |
-      snapcraftctl pull
-      # patch -d "$SNAPCRAFT_PART_SRC" -p1 < "$SNAPCRAFT_STAGE"/mpg123-1.28.0-armfpu-neon.diff
+      craftctl default
+      # patch -d "$CRAFT_PART_SRC" -p1 < "$CRAFT_PROJECT_DIR"/mpg123-1.28.0-armfpu-neon.diff
     prime:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
       - -include
 
-  patches:
+  wrapper:
     plugin: dump
-    source: patches
-    prime:
-      - -*
+    source: scripts
 
 apps:
   mpg123:
     command: bin/mpg123
+    command-chain: [pulse-runner]
     plugs:
       - home
       - pulseaudio
       - alsa
       - audio-playback
       - network
+      - removable-media
       - x11  # needed to use pulse
     environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/pulseaudio
       MPG123_MODDIR: $SNAP/lib/mpg123
 
   id3dump:
@@ -66,12 +66,14 @@ apps:
 
   out123:
     command: bin/out123
+    command-chain: [pulse-runner]
     plugs:
       - home
       - pulseaudio
       - alsa
       - audio-playback
       - network
+      - removable-media
       - x11  # needed to use pulse
 
 layout:
