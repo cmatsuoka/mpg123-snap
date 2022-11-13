@@ -1,5 +1,5 @@
 name: mpg123-cm
-version: 1.30.2
+version: 1.31.1
 base: core22
 summary: A fast console MPEG audio player
 description: |
@@ -12,7 +12,7 @@ confinement: strict
 parts:
   mpg123:
     plugin: autotools
-    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.30.2/mpg123-1.30.2.tar.bz2
+    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.31.1/mpg123-1.31.1.tar.bz2
     autotools-configure-parameters:
       - --prefix=
       - --with-default-audio=pulse
