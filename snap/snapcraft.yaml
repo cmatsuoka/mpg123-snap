@@ -12,7 +12,7 @@ confinement: strict
 parts:
   mpg123:
     plugin: autotools
-    source: https://sourceforge.net/projects/mpg123/files/mpg123/1.31.1/mpg123-1.31.1.tar.bz2
+    source: https://sourceforge.net/projects/mpg123/files/mpg123/$SNAPCRAFT_PROJECT_VERSION/mpg123-$SNAPCRAFT_PROJECT_VERSION.tar.bz2
     autotools-configure-parameters:
       - --prefix=
       - --with-default-audio=pulse
@@ -27,16 +27,15 @@ parts:
       - libasound2
     override-pull: |
       craftctl default
-      # patch -d "$CRAFT_PART_SRC" -p1 < "$CRAFT_PROJECT_DIR"/mpg123-1.28.0-armfpu-neon.diff
+      # patch -d "$CRAFT_PART_SRC" -p1 < "$CRAFT_PROJECT_DIR"/patches/mpg123-1.28.0-armfpu-neon.diff
+    override-build: |
+      craftctl default
+      cp "$CRAFT_PROJECT_DIR"/scripts/pulse-runner "$CRAFT_PART_INSTALL"
     prime:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
       - -include
-
-  wrapper:
-    plugin: dump
-    source: scripts
 
 apps:
   mpg123:
