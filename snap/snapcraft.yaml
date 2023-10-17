@@ -1,5 +1,5 @@
 name: mpg123-cm
-version: 1.31.3
+version: 1.32.3
 base: core22
 summary: A fast console MPEG audio player
 description: |
@@ -50,7 +50,7 @@ apps:
       - removable-media
       - x11  # needed to use pulse
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/pulseaudio
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio
       MPG123_MODDIR: $SNAP/lib/mpg123
 
   id3dump:
