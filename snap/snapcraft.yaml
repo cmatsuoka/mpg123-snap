@@ -1,5 +1,5 @@
 name: mpg123-cm
-version: 1.33.0
+version: 1.33.1
 base: core22
 summary: A fast console MPEG audio player
 description: |
