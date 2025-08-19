@@ -1,0 +1,20 @@
+summary: Smoke test mpg123 command
+
+execute: |
+  mp3file="sample-3s.mp3"
+  chown root:root "$mp3file"
+
+  mpg123-cm.mpg123 -v -t "$mp3file" 2> output.txt
+
+  cat output.txt
+
+  cat output.txt | MATCH "Title:   Title test tag"
+  cat output.txt | MATCH "Artist:  Artist test tag"
+  cat output.txt | MATCH "Album:   Album test tag"
+  cat output.txt | MATCH "Year:    2025"
+  cat output.txt | MATCH "Genre:   New Age"
+  cat output.txt | MATCH "Comment: Comment test tag"
+
+  cat output.txt | MATCH "^\[0:03\] Decoding of sample-3s\.mp3 finished\."
+
+

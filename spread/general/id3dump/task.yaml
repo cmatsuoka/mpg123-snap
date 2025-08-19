@@ -1,0 +1,8 @@
+summary: Smoke test i3dump command
+
+execute: |
+  mp3file="../mpg123/sample-3s.mp3"
+  chown root:root "$mp3file"
+
+  mpg123-cm.id3dump "$mp3file" > output.txt
+  diff -u output.txt expected-output.txt

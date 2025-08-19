@@ -1,0 +1,17 @@
+summary: Snap upgrade and revert
+
+prepare: |
+  snap remove mpg123-cm --purge
+
+execute: |
+  # install package from develoment environment
+  snap install "$CRAFT_ARTIFACT" --dangerous
+
+  # install package again
+  snap install "$CRAFT_ARTIFACT" --dangerous
+
+  # revert package
+  snap revert mpg123-cm
+  
+  # remove package
+  snap remove mpg123-cm --purge

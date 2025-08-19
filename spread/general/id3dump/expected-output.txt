@@ -1,0 +1,34 @@
+FILE: ../mpg123/sample-3s.mp3
+
+====      ID3v1       ====
+Title: Title test tag
+Artist: Artist test tag
+Album: Album test tag
+Year: 2025
+Comment: Comment test tag
+Genre: 10
+====      ID3v2       ====
+Title: Title test tag
+Artist: Artist test tag
+Album: Album test tag
+Year: 2025
+Comment: Comment test tag
+Genre: (10)
+
+==== ID3v2 Raw frames ====
+TPE1 language()
+ Artist test tag
+TIT2 language()
+ Title test tag
+TALB language()
+ Album test tag
+TYER language()
+ 2025
+TRCK language()
+ 42
+TCON language()
+ (10)
+COMM description() language():
+ Comment test tag
+COMM description(ID3v1 Comment) language(XXX):
+ Comment test tag
